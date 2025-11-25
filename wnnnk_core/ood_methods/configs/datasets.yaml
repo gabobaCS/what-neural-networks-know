@@ -1,0 +1,35 @@
+# Dataset configuration for OOD detection experiments
+# Modify paths according to your dataset locations
+
+# In-distribution (ID) dataset configuration
+id_dataset:
+  name: "cifar10"
+  path: "./data/cifar10"
+  train: true  # Whether to use training set (needed for KNN)
+
+# Out-of-distribution (OOD) datasets to evaluate
+ood_datasets:
+  - name: "cifar100"
+    path: "./data/cifar100"
+
+  - name: "svhn"
+    path: "./data/svhn"
+
+  # Example for custom dataset
+  # - name: "my_ood_dataset"
+  #   path: "/path/to/my/dataset"
+
+# Model configuration
+model:
+  name: "resnet50"  # Options: resnet18, resnet50, resnet101, vit, efficientnet, densenet
+  num_classes: 10   # Number of classes in ID dataset
+  pretrained: true  # Whether to use pretrained weights
+
+# Experiment settings
+experiment:
+  batch_size: 128
+  num_workers: 4
+  seed: 42
+  device: "cuda"  # "cuda" or "cpu"
+  cache_dir: "./cache"
+  img_size: 224

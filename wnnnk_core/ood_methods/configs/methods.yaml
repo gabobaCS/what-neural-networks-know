@@ -1,0 +1,26 @@
+# OOD detection methods configuration
+# Enable/disable methods and configure their hyperparameters
+
+# Maximum Softmax Probability (MSP)
+# Reference: Hendrycks & Gimpel, ICLR 2017
+msp:
+  enabled: true
+
+# Energy-based OOD Detection
+# Reference: Liu et al., NeurIPS 2020
+energy:
+  enabled: true
+  temperature: 1.0  # Temperature parameter for energy computation
+
+# K-Nearest Neighbors (KNN)
+# Reference: Sun et al., ICML 2022
+knn:
+  enabled: true
+  k: 50           # Number of nearest neighbors
+  use_gpu: true   # Use GPU acceleration with FAISS
+
+# Example: Add your custom method configuration
+# my_custom_method:
+#   enabled: true
+#   hyperparam1: value1
+#   hyperparam2: value2

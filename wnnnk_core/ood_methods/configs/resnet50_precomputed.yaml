@@ -1,0 +1,55 @@
+# Precomputed data paths for ResNet50
+# This config maps datasets to their precomputed logits and avgpool activations
+
+model_name: resnet50
+
+# Base directory for precomputed data
+data_dir: "../data"
+
+
+id_dataset:
+  name: imagenet1k
+  logits: "../data/imagenet1k/logits/imagenet1k_logits.pt"
+  avgpool: "../data/imagenet1k/train/resnet50_imagenet1k_train_10perclass_avgpool.pt"
+  validation_set: "E:/datasets/ImageNet/ILSVRC2012_img_val"
+  folder_structure: "image_folder"  # ImageNet images are in a flat structure
+
+
+# OOD datasets
+ood_datasets:
+  # iNaturalist
+  - name: inaturalist
+    logits: "../data/inaturalist/logits/selected_inaturalist21_logits.pt"
+    avgpool: "../data/inaturalist/avgpool/resnet50_inaturalist21_10k_avgpool.pt"
+    dataset: "E:/datasets/KNN-OOD/iNaturalist/images"
+    folder_structure: "flat"  # iNaturalist images are in a flat structure
+
+  # SUN
+  - name: sun
+    logits: "../data/sun/logits/sun_logits.pt"
+    avgpool: "../data/sun/avgpool/resnet50_sun_10k_avgpool.pt"
+    dataset: "E:/datasets/KNN-OOD/SUN/images"
+    folder_structure: "flat"  # SUN images are in a flat structure
+
+  # Places
+  - name: places
+    logits: "../data/places/logits/places_logits.pt"
+    avgpool: "../data/places/avgpool/resnet50_places_10k_avgpool.pt"
+    dataset: "E:/datasets/KNN-OOD/Places/images"
+    folder_structure: "flat"  # Places images are in a flat structure
+
+  # Textures
+  - name: textures
+    logits: "../data/textures/logits/textures_logits.pt"
+    avgpool: "../data/textures/avgpool/resnet50_textures_avgpool.pt"
+    dataset: "E:/datasets/KNN-OOD/Textures"
+    folder_structure: "image_folder"  # Textures images are in a folder structure
+
+deep_inversion:
+    logits: null  # No logits available
+    avgpool: "../data/deep_inversion/avgpool/resnet50_deep_inversion_avgpool.pt"
+
+# Data format notes:
+# - logits: Raw model outputs (before softmax), shape: [N, num_classes]
+# - avgpool: Average pooled features from penultimate layer, shape: [N, feature_dim]
+# - All files should be PyTorch tensors saved with torch.save()
